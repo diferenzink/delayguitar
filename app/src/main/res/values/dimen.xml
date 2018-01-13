@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activityMainPadding">12dp</dimen>
+    <dimen name="collapsed_width">20dp</dimen>
+    <dimen name="imgBandera_marginRight">12dp</dimen>
+</resources>

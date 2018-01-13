@@ -1,5 +1,6 @@
 package com.diferenzink.delayguitar;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,24 +14,24 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     EditText BPMEditText;
-    Spinner notaEditText;
+    Spinner notaSpinner;
     Button calcularButton;
     TextView resultadoTextView;
-    ArrayList<Nota> notas = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BPMEditText = (EditText) findViewById(R.id.BPMET);
-        Spinner notaSpinner = (Spinner) findViewById(R.id.notaSpinner);
+        notaSpinner = (Spinner) findViewById(R.id.notaSpinner);
         calcularButton = (Button) findViewById(R.id.calcularBT);
         resultadoTextView = (TextView) findViewById(R.id.resultadoTV);
 
-        notas.add(new Nota("Blanca","blanca.png", (float) 0.5));
-        notas.add(new Nota("Negra","negra.png",1));
-        notas.add(new Nota("Corchea","corchea.png",2));
-        
+
+        NotasAdapter notasAdapter = new NotasAdapter(this,getNotas());
+        notaSpinner.setAdapter(notasAdapter);
+
 
         calcularButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,5 +41,13 @@ public class MainActivity extends AppCompatActivity {
                 resultadoTextView.setText(String.valueOf(resultado));
             }
         });
+    }
+
+    private ArrayList<Nota> getNotas() {
+        ArrayList<Nota> notas = new ArrayList<>();
+        notas.add(new Nota("Blanca", "blanca.png", (float) 0.5));
+        notas.add(new Nota("Negra", "negra.png", 1));
+        notas.add(new Nota("Corchea", "corchea.png", 2));
+        return notas;
     }
 }
